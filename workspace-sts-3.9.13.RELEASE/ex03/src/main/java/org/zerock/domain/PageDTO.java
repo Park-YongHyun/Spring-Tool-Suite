@@ -5,6 +5,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
+// 페이징
 public class PageDTO {
 	private int startPage;
 	private int endPage;

@@ -23,6 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 
+//	// 다수 게시글 조회
 //	@GetMapping("/list")
 //	public void list(Model model) {
 //		log.info("list");
@@ -30,6 +31,7 @@ public class BoardController {
 //		model.addAttribute("list", service.getList());
 //	}
 
+	// 다수 게시글 조회(+ 페이징, 검색) 페이지
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		log.info("list: " + cri);
@@ -39,11 +41,13 @@ public class BoardController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 
+	// 게시글 등록 페이지
 	@GetMapping("/register")
 	public void resister() {
 
 	}
 
+	// 게시글 등록 처리
 	@PostMapping("/register")
 	public String regester(BoardVO board, RedirectAttributes rttr) {
 		log.info("register: " + board);
@@ -52,12 +56,14 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
+	// 게시글 조회, 수정 페이지
 	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get or /modify");
 		model.addAttribute("board", service.get(bno));
 	}
 
+	// 게시글 수정 처리
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify:" + board);
@@ -73,6 +79,7 @@ public class BoardController {
 		return "redirect:/board/list" + cri.getListLink();
 	}
 
+	// 게시글 삭제 처리
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
 		log.info("remove......." + bno);

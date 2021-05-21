@@ -31,8 +31,8 @@ public class SampleController { // REST
 		return "테스트";
 	}
 
-	// 브라우저 주소창에서 url + { ".xml", ".json" } 방식으로 접속 가능
-	@GetMapping(value = "/getSample", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	// 브라우저 주소창에서 url + { ".xml", ".json", ... }(1개 선택) 방식으로 접속 가능
+	@GetMapping(value = "/getSample", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public SampleVO getSample() {
 		return new SampleVO(111, "qqq", "ㅂㅂㅂ");
 	}

@@ -34,6 +34,14 @@
 					<label>Writer</label> <input class="form-control" name="writer"
 						value='<c:out value="${board.writer}" />' readonly="readonly">
 				</div>
+				<div class="form-group">
+					<label>RegDate</label> <input class="form-control" name="regDate"
+						value='<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate}"/>' readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label>update Date</label> <input class="form-control" name="updateDate"
+						value='<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.updateDate}"/>' readonly="readonly">
+				</div>
 				<button data-oper="modify" class="btn btn-default">Modify</button>
 				<button data-oper="list" class="btn btn-info">List</button>
 				<form id="operForm" action="/board/modify" method="get">
@@ -52,15 +60,18 @@
 </div>
 <!-- /.row -->
 
+<!-- 게시글 -->
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", () => {
 	let operForm = document.querySelector('#operForm')
 
+	// 수정 페이지로 이동
 	document.querySelector('button[data-oper="modify"]').addEventListener("click", () => {
 		operForm.setAttribute('action', '/board/modify')
 		operForm.submit()
 	})
 
+	// 목록 페이지로 이동
 	document.querySelector('button[data-oper="list"]').addEventListener("click", () => {
 		operForm.querySelector('#bno').remove()
 		operForm.setAttribute('action', '/board/list')
@@ -68,5 +79,44 @@ document.addEventListener("DOMContentLoaded", () => {
 	})
 })
 </script>
+<!-- /게시글 -->
+
+<!-- 댓글 -->
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script type="text/javascript">
+console.log("===========")
+console.log("JS TEST")
+
+let bnoValue = '<c:out value="${board.bno}"/>'
+
+// 댓글 등록 테스트
+// replyService.add({ reply: "js test", replyer: "tester", bno: bnoValue }, (result) => {
+// 	console.log(result)
+// })
+
+// // 댓글 조회 테스트
+// replyService.get(2, (data) => {
+// 	console.log(data)
+// })
+
+// // 게시물의 댓글 조회 테스트
+// replyService.getList({ bno: bnoValue, page: 1 }, (list) => {
+// 	for(let i = 0, len = list.length; i < len; i++) {
+// 		console.log(list[i])
+// 	}
+// })
+
+// // 댓글 수정 테스트
+// replyService.update({ rno: 7, reply: "댓글 수정 테스트" }, (result) => {
+// 	console.log(result)
+// })
+
+// // 댓글 삭제 테스트
+// replyService.remove(5, (result) => {
+// 	console.log(result)
+// })
+</script>
+<!-- /댓글 -->
 
 <%@ include file="../includes/footer.jsp" %>

@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.BoardMapper">
 
+	<!-- 모든 게시글 조회 -->
 	<select id="getList" resultType="org.zerock.domain.BoardVO">
 		<![CDATA[
 		select * from tbl_board where bno > 0
 		]]>
 	</select>
 
+	<!-- 검색 처리 -->
 	<sql id="criteria">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item="type" collection="typeArr">
@@ -28,6 +30,7 @@
 		</trim>
 	</sql>
 
+	<!-- 다수 게시글 조회(+ 페이징, 검색) -->
 	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
 		<![CDATA[
 		select bno, title, content, writer, regdate, updatedate
@@ -44,11 +47,13 @@
 		]]>
 	</select>
 
+	<!-- 게시글 등록 -->
 	<insert id="insert">
 		insert into tbl_board (bno, title, content, writer)
 		values (seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 
+	<!-- 게시글 등록(bno(기본키) 미리 처리) -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
 			select seq_board.nextval from dual
@@ -57,14 +62,17 @@
 		values (#{bno}, #{title}, #{content}, #{writer})
 	</insert>
 
+	<!-- 게시글 조회 -->
 	<select id="read" resultType="org.zerock.domain.BoardVO">
 		select * from tbl_board where bno = #{bno}
 	</select>
 
+	<!-- 게시글 삭제 -->
 	<delete id="delete">
 		delete from tbl_board where bno = #{bno}
 	</delete>
 
+	<!-- 게시글 수정 -->
 	<update id="update">
 		update tbl_board
 		set title = #{title},
@@ -74,6 +82,7 @@
 		where bno = #{bno}
 	</update>
 
+	<!-- 다수 게시글의 수 카운트(+ 검색) -->
 	<select id="getTotalCount" resultType="int">
 		select count(*) from tbl_board
 		where

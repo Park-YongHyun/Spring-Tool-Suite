@@ -9,11 +9,12 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
+// 페이징, 검색 처리
 public class Criteria {
 	private int pageNum;
-	private int amount;
+	private int amount; // 페이지당 게시글의 수
 
-	private String type;
+	private String type; // 검색 종류
 	private String keyword;
 
 	public Criteria() {
@@ -29,7 +30,8 @@ public class Criteria {
 		return type == null ? new String[] {} : type.split("");
 	}
 	
-	public String getListLink() { // url 파라미터 연결
+	// url 파라미터 연결
+	public String getListLink() {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
 			.queryParam("pageNum", this.getPageNum())
 			.queryParam("amount", this.getAmount())

@@ -37,8 +37,8 @@
 							<td><c:out value="${board.bno}" /></td>
 							<td><a class="move" href="<c:out value='${board.bno}' />"><c:out value="${board.title}" /></a></td>
 							<td><c:out value="${board.writer}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.regdate}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.updateDate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.regdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.updateDate}" /></td>
 						</tr>
 					</c:forEach>
 				</table>
