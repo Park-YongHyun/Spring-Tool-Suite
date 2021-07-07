@@ -60,6 +60,75 @@
 </div>
 <!-- /.row -->
 
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+				<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">New Reply</button>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<!-- start reply -->
+				<template id="template-reply">
+					<li class="left clearfix" data-rno="">
+						<div>
+							<div class="header">
+								<strong class="primary-font">replyer</strong>
+								<small class="pull-right text-muted">0000.00.00 00:00:00</small>
+							</div>
+							<p>reply content</p>
+						</div>
+					</li>
+				</template>
+				<ul class="chat"></ul>
+				<!-- end reply -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<!-- 댓글 -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Reply</label>
+					<input class="form-control" name="reply" value="New Reply!!!">
+				</div>
+				<div class="form-group">
+					<label>Replyer</label>
+					<input class="form-control" name="replyer" value="replyer">
+				</div>
+				<div class="form-group">
+					<label>Reply Date</label>
+					<input class="form-control" name="replyDate" value="">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="modalModifyBtn" type="button" class="btn btn-warning">Modify</button>
+				<button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
+				<button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
+				<button id="modalCloseBtn" type="button" class="btn btn-default">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- /댓글 -->
+
 <!-- 게시글 -->
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", () => {
@@ -89,6 +158,7 @@ console.log("===========")
 console.log("JS TEST")
 
 let bnoValue = '<c:out value="${board.bno}"/>'
+let replyUL = document.querySelector('.chat')
 
 // 댓글 등록 테스트
 // replyService.add({ reply: "js test", replyer: "tester", bno: bnoValue }, (result) => {
@@ -116,6 +186,31 @@ let bnoValue = '<c:out value="${board.bno}"/>'
 // replyService.remove(5, (result) => {
 // 	console.log(result)
 // })
+
+showList(1)
+
+// 댓글 표시
+function showList(page) {
+	replyService.getList({bno: bnoValue, page: page || 1}, (replyList) => {
+		replyList.forEach((replyData) => {
+			let replyClone = document.querySelector("#template-reply").content.querySelector("li").cloneNode(true)
+			replyClone.attributes["data-rno"] = replyData.rno
+			replyClone.querySelector("strong").innerText = replyData.replyer
+			let date = new Date(replyData.replyDate)
+			date = {
+				year: date.getFullYear(),
+				month: `\${date.getMonth()}`.padStart(2, '0'),
+				date: `\${date.getDate()}`.padStart(2, '0'),
+				hours: `\${date.getHours()}`.padStart(2, '0'),
+				minutes: `\${date.getMinutes()}`.padStart(2, '0'),
+				seconds: `\${date.getSeconds()}`.padStart(2, '0')
+			}
+			replyClone.querySelector("small").innerText = `\${date.year}.\${date.month}.\${date.date} \${date.hours}:\${date.minutes}:\${date.seconds}`
+			replyClone.querySelector("p").innerText = replyData.reply
+			replyUL.appendChild(replyClone)
+		})
+	})
+}
 </script>
 <!-- /댓글 -->
 

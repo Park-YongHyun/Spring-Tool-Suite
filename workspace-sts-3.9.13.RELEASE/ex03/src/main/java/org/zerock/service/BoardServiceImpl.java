@@ -51,7 +51,7 @@ public class BoardServiceImpl implements BoardService {
 //		return mapper.getList();
 //	}
 
-	// 다수 게시글 조회(+페이징)
+	// 다수 게시글 조회(+ 페이징)
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
 		log.info("get List with criteria: " + cri);

@@ -1,0 +1,6 @@
+mybatis 성공시 리턴값
+
+select: 쿼리 결과
+insert: 1, 여러개 1
+update: 수행된 행 수
+delete: 수행된 행 수

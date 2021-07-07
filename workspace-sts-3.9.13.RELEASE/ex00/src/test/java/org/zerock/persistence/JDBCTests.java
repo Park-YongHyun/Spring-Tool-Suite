@@ -23,7 +23,7 @@ public class JDBCTests {
 	@Test
 	public void testConnvection() {
 		try(Connection con = DriverManager.getConnection(
-				"jdbc:oracle:thin:@localhost:50001:XE", 
+				"jdbc:oracle:thin:@localhost:1521:XE", 
 				"book_ex",
 				"book_ex")){
 			
