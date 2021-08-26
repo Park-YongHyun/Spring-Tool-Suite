@@ -1,6 +1,9 @@
 mybatis 성공시 리턴값
+	select: 쿼리 결과
+	insert: 1, 여러개 1
+	update: 수행된 행 수
+	delete: 수행된 행 수
 
-select: 쿼리 결과
-insert: 1, 여러개 1
-update: 수행된 행 수
-delete: 수행된 행 수
+입력시
+	#{}: 문자열로 입력됨, sql 삽입 공격을 방지
+	${}: 데이터 그대로 입력됨, sql 삽입 공격에 노출

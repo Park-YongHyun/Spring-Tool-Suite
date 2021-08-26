@@ -29,7 +29,7 @@
 							</div>
 							<div class="row">
 								<div class="col-2">
-									<input type="text" class="form-control" placeholder="이름" name="writer" required="required" value="${post.writer}" readonly="readonly">
+									<input type="text" class="form-control" placeholder="이름" name="writer" required="required" value="${post.writer}" readonly="">
 								</div>
 								<div class="col-2">
 									<input type="text" class="form-control" placeholder="암호" name="password" required="required">

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.noname.mapper.BbsCommentMapper">
+	<!-- 댓글 작성 -->
+	<insert id="insert">
+		<bind name="hasParent" value="parent != 0"/>
+		insert into bbs_comment (
+			num, post_num,
+			content,
+			writer, password
+			<if test="hasParent">
+				, depth, parent
+			</if>
+		) values (
+			bbs_comment_seq.nextval, #{postNum},
+			#{content},
+			#{writer}, #{password}
+			<if test="hasParent">
+				, #{depth}, #{parent}
+			</if>
+		)
+	</insert>
+	
+	<!-- 댓글 읽기 -->
+	<select id="selectOne" resultType="top.noname.domain.BbsCommentVO">
+		select *
+		from bbs_comment
+		where num = #{num}
+	</select>
+	
+	<!-- 댓글 목록 읽기 -->
+   	<!-- 계층형(트리) 댓글, 페이징: 최신순, 페이지내: 오래된순 -->
+	<select id="selectList" resultType="top.noname.domain.BbsCommentVO">
+		<![CDATA[
+			select *
+			from (
+			    select
+			    	rownum rnum,
+			    	num,
+			    	content,
+			    	writer,
+			    	write_date, update_date,
+			    	depth
+			    from (
+			        select /*+ index_asc(bbs_comment bbs_comment_index) */ *
+			        from bbs_comment
+			        where post_num = #{postNum}
+			        start with parent is null
+			        connect by prior num = parent
+			        order by rownum desc
+			    ) where rownum <= #{page.endRow}
+			) where rnum >= #{page.startRow}
+			order by rnum desc
+		]]>
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="update">
+		update bbs_comment
+		set
+			content = #{content},
+			update_date = systimestamp at time zone 'asia/seoul'
+		where
+			num = #{num}
+			and password = #{password}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		delete from bbs_comment
+		where
+			num = #{num}
+			and password = #{password}
+	</delete>
+	<!-- 댓글 자식 여부 -->
+	<select id="hasChild" resultType="boolean">
+		select case when exists (
+			select /*+ index_asc(bbs_comment bbs_comment_index) */ num
+			from bbs_comment
+			where
+				post_num = #{postNum}
+				and parent = #{num}
+		) then 1 else 0 end as result
+		from dual
+	</select>
+	<!-- 댓글 임시 삭제 (자식이 있는 댓글) -->
+	<update id="tempDelete">
+		update bbs_comment
+		set
+			write_date = null
+		where
+			num = #{num}
+			and password = #{password}
+	</update>
+	
+	<!-- 댓글 카운트 -->
+	<select id="count" resultType="int">
+		select count(*)
+		from bbs_comment
+		where post_num = #{postNum}
+	</select>
+</mapper>
+
+
+
+

@@ -21,7 +21,7 @@ public class BbsPostServiceTest extends TestTemplate {
 	}
 
 	// 게시글 추가
-	public void addPost() {
+	public void writePost() {
 		BbsPostVO postVO = new BbsPostVO();
 		
 		postVO.setTitle("제목 " + 1);

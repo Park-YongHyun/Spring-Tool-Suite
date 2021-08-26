@@ -13,9 +13,7 @@ public class BbsPageVO {
 	}
 	public BbsPageVO(int pageNum, int pageSize) {
 		this.pageNum = pageNum;
-		this.pageSize = pageSize;
-
-		setRows();
+		setPageSize(pageSize);
 	}
 
 	private void setRows() {
@@ -28,7 +26,7 @@ public class BbsPageVO {
 		setRows();
 	}
 	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+		this.pageSize = pageSize > 100 ? 100 : pageSize;
 
 		setRows();
 	}

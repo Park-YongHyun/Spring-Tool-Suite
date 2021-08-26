@@ -3,11 +3,14 @@ package top.noname.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,7 +25,7 @@ public class BbsController {
 	private static final Logger log = LoggerFactory.getLogger(BbsController.class);
 	
 	@Autowired
-	private BbsPostService postService;
+	private BbsPostService service;
 	
 	// 게시글 작성
 	@GetMapping("/write")
@@ -34,7 +37,7 @@ public class BbsController {
 	public String write(BbsPostVO postVO, RedirectAttributes attr) {
 		log.info("@@@ bbs/write submit");
 		
-		if (postService.writePost(postVO)) {
+		if (service.writePost(postVO)) {
 			attr.addFlashAttribute("result", "success");
 		} else {
 			attr.addFlashAttribute("result", "failure");
@@ -48,7 +51,7 @@ public class BbsController {
 		log.info("@@@ bbs/read");
 		
 		model.addAttribute("page", pageVO);
-		model.addAttribute("post", postService.readPost(num));
+		model.addAttribute("post", service.readPost(num));
 	}
 	
 	// 게시글 목록 읽기
@@ -56,7 +59,7 @@ public class BbsController {
 	public String list(BbsPageVO pageVO, Model model) {
 		log.info("@@@ bbs");
 		
-		model.addAttribute("list", postService.readPostList(pageVO));
+		model.addAttribute("list", service.readPostList(pageVO));
 		model.addAttribute("page", pageVO);
 		return "bbs/list";
 	}
@@ -66,14 +69,14 @@ public class BbsController {
 	public void edit(int num, Model model) {
 		log.info("@@@ bbs/edit");
 		
-		model.addAttribute("post", postService.readPost(num));
+		model.addAttribute("post", service.readPost(num));
 	}
 	// 게시글 수정 제출
 	@PostMapping("/edit")
 	public String edit(BbsPostVO postVO, RedirectAttributes attr) {
 		log.info("@@@ bbs/edit");
 		
-		if (postService.editPost(postVO)) {
+		if (service.editPost(postVO)) {
 			attr.addFlashAttribute("result", "success");
 		} else {
 			attr.addFlashAttribute("result", "failure");
@@ -84,12 +87,11 @@ public class BbsController {
 	// 게시글 삭제
 	@DeleteMapping("/delete")
 	@ResponseBody
-	public String delete(BbsPostVO postVO) {
+	public ResponseEntity<String> delete(@RequestBody BbsPostVO postVO) {
 		log.info("@@@ bbs/delete");
 		
-		if (postService.deletePost(postVO)) {
-			return "success";
-		}
-		return "failure";
+		return service.deletePost(postVO)
+				? new ResponseEntity<>(HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

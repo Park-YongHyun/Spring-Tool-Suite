@@ -3,13 +3,25 @@
 <mapper namespace="top.noname.mapper.BbsPostMapper">
 	<!-- 게시글 작성 -->
 	<insert id="insert">
-		insert into bbs_post(num, title, content, writer, password)
-		values(seq_bbs_post.nextval, #{title}, #{content}, #{writer}, #{password})
+		insert into bbs_post (
+			num,
+			title, content,
+			writer, password
+		) values (
+			bbs_post_seq.nextval,
+			#{title}, #{content},
+			#{writer}, #{password}
+		)
 	</insert>
 	
 	<!-- 게시글 읽기 -->
 	<select id="selectOne" resultType="top.noname.domain.BbsPostVO">
-		select num, title, content, writer, write_date, update_date from bbs_post
+		select
+			num,
+			title, content,
+			writer,
+			write_date, update_date
+		from bbs_post
 		where num = #{num}
 	</select>
 	
@@ -18,7 +30,10 @@
 		<![CDATA[
 			select *
 			from (
-				select /*+ index_desc(bbs_post bbs_post_pk) */ rownum rnum, num, title, writer, write_date
+				select /*+ index_desc(bbs_post bbs_post_pk) */
+					rownum rnum, num,
+					title, writer,
+					write_date
 				from bbs_post
 				where rownum <= #{endRow}
 			) where rnum >= #{startRow}
@@ -27,13 +42,21 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="update">
-		update bbs_post set title = #{title}, content = #{content}, update_date = systimestamp at time zone 'asia/seoul'
-		where num = #{num} and password = #{password}
+		update bbs_post
+		set
+			title = #{title}, content = #{content},
+			update_date = systimestamp at time zone 'asia/seoul'
+		where
+			num = #{num}
+			and password = #{password}
 	</update>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="delete">
-		delete from bbs_post where num = #{num} and password = #{password}
+		delete from bbs_post
+		where
+			num = #{num}
+			and password = #{password}
 	</delete>
 	
 	<!-- 게시글 카운트 -->

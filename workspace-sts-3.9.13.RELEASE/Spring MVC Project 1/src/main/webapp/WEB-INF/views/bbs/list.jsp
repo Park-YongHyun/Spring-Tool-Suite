@@ -23,12 +23,12 @@ table#postList th, table#postList td {
 		<div class="card">
 			<!-- list-group -->
 			<ul class="list-group list-group-flush">
+				<!-- 게시글 목록 -->
 				<li class="list-group-item">
-					<!-- 게시글 목록 -->
 					<table id="postList" class="table table-hover">
 						<thead>
 							<tr>
-								<th class="col-1" scope="col"># ${result}</th>
+								<th class="col-1" scope="col">#</th>
 								<th class="col-6" scope="col">제목</th>
 								<th class="col-2" scope="col">작성자</th>
 								<th class="col-3" scope="col">작성일</th>
@@ -44,8 +44,9 @@ table#postList th, table#postList td {
 								</tr>
 							</c:forEach>
 						</tbody>
-					</table> <!-- /게시글 목록 -->
+					</table>
 				</li>
+				<!-- /게시글 목록 -->
 
 				<li class="list-group-item">
 					<div class="row justify-content-end">
@@ -55,8 +56,8 @@ table#postList th, table#postList td {
 					</div>
 				</li>
 
+				<!-- 페이지 버튼 -->
 				<li class="list-group-item">
-					<!-- 페이지 버튼 -->
 					<ul class="pagination justify-content-center">
 						<c:set var="pageSize" value="pageSize=${page.pageSize}" />
 
@@ -77,8 +78,9 @@ table#postList th, table#postList td {
 							<li class="page-item"><a class="page-link" href="?pageNum=${page.endPage + 1}&${pageSize}"><c:out value="${'>'}" /></a></li>
 							<li class="page-item"><a class="page-link" href="?pageNum=${page.totalPage}&${pageSize}"><c:out value="${'>>'}" /></a></li>
 						</c:if>
-					</ul> <!-- /페이지 버튼 -->
+					</ul>
 				</li>
+				<!-- /페이지 버튼 -->
 			</ul>
 			<!-- /list-group -->
 		</div>
@@ -88,15 +90,14 @@ table#postList th, table#postList td {
 </div>
 
 <script type="text/javascript">
-switch ('${result}') {
-case 'success':
-	alert('작성 되었습니다.')
-	break
-case 'failure':
-	alert('오류가 있습니다.')
-	history.back()
-	break
-}
+	switch ('${result}') {
+	case 'success':
+		break
+	case 'failure':
+		alert('오류가 있습니다.')
+		history.back()
+		break
+	}
 </script>
 
 <%@ include file="../include/footer.jsp"%>

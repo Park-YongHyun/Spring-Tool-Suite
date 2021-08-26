@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import top.noname.domain.BbsPageVO;
 import top.noname.domain.BbsPostVO;
-import top.noname.mapper.BbsPostMapper;
 import top.noname.test.TestTemplate;
 
 public class BbsPostMapperTest extends TestTemplate {
@@ -19,7 +18,7 @@ public class BbsPostMapperTest extends TestTemplate {
 		count();
 	}
 
-	// 게시글 추가
+	// 게시글 작성
 	public void insert() {
 		BbsPostVO postVO = new BbsPostVO();
 		

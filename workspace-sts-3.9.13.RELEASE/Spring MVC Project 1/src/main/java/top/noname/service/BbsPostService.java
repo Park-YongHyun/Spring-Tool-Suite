@@ -6,7 +6,7 @@ import top.noname.domain.BbsPageVO;
 import top.noname.domain.BbsPostVO;
 
 public interface BbsPostService {
-	// 게시글 쓰기
+	// 게시글 작성
 	public boolean writePost(BbsPostVO postVO);
 	
 	// 게시글 읽기
