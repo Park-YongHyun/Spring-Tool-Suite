@@ -1,17 +1,19 @@
 package top.noname.domain;
 
-public class BbsPageVO {
-	private int pageNum;
-	private int pageSize;
+public class pageDTO {
+	private int pageNum, pageSize;
+
 	private int startRow, endRow;
 
 	private int startPage, endPage, totalPage;
 	private boolean prev, next;
 
-	public BbsPageVO() {
+	private String searchKeyword, searchType;
+
+	public pageDTO() {
 		this(1, 10);
 	}
-	public BbsPageVO(int pageNum, int pageSize) {
+	public pageDTO(int pageNum, int pageSize) {
 		this.pageNum = pageNum;
 		setPageSize(pageSize);
 	}
@@ -41,6 +43,12 @@ public class BbsPageVO {
 		prev = pageNum > 10;
 		next = endPage < totalPage;
 	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
 
 	public int getPageNum() {
 		return pageNum;
@@ -69,11 +77,17 @@ public class BbsPageVO {
 	public boolean isPrev() {
 		return prev;
 	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public String getSearchType() {
+		return searchType;
+	}
 
 	@Override
 	public String toString() {
-		return "BbsPageVO [pageNum=" + pageNum + ", pageSize=" + pageSize + ", startRow=" + startRow + ", endRow="
+		return "pageDTO [pageNum=" + pageNum + ", pageSize=" + pageSize + ", startRow=" + startRow + ", endRow="
 				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage + ", prev="
-				+ prev + ", next=" + next + "]";
+				+ prev + ", next=" + next + ", searchKeyword=" + searchKeyword + ", searchType=" + searchType + "]";
 	}
 }

@@ -1,11 +1,12 @@
 package top.noname.test;
 
 import org.junit.Test;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.nhncorp.lucy.security.xss.LucyXssFilter;
 import com.nhncorp.lucy.security.xss.XssSaxFilter;
 
-import top.noname.domain.BbsCommentVO;
+import top.noname.domain.BbsCommentDTO;
 
 public class JavaTest extends TestTemplate {
 	@Test

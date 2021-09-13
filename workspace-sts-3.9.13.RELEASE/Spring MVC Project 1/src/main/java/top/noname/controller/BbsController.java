@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import top.noname.domain.BbsPageVO;
-import top.noname.domain.BbsPostVO;
+import top.noname.domain.pageDTO;
+import top.noname.domain.BbsPostDTO;
 import top.noname.service.BbsPostService;
 
 @Controller
@@ -34,10 +34,10 @@ public class BbsController {
 	}
 	// 게시글 작성 제출
 	@PostMapping("/write")
-	public String write(BbsPostVO postVO, RedirectAttributes attr) {
+	public String write(BbsPostDTO postDTO, RedirectAttributes attr) {
 		log.info("@@@ bbs/write submit");
 		
-		if (service.writePost(postVO)) {
+		if (service.writePost(postDTO)) {
 			attr.addFlashAttribute("result", "success");
 		} else {
 			attr.addFlashAttribute("result", "failure");
@@ -47,20 +47,20 @@ public class BbsController {
 	
 	// 게시글 읽기
 	@GetMapping("/read")
-	public void read(int num, BbsPageVO pageVO, Model model) {
+	public void read(int num, pageDTO pageDTO, Model model) {
 		log.info("@@@ bbs/read");
 		
-		model.addAttribute("page", pageVO);
+		model.addAttribute("page", pageDTO);
 		model.addAttribute("post", service.readPost(num));
 	}
 	
 	// 게시글 목록 읽기
 	@GetMapping("")
-	public String list(BbsPageVO pageVO, Model model) {
+	public String list(pageDTO pageDTO, Model model) {
 		log.info("@@@ bbs");
 		
-		model.addAttribute("list", service.readPostList(pageVO));
-		model.addAttribute("page", pageVO);
+		model.addAttribute("postList", service.readPostList(pageDTO));
+		model.addAttribute("page", pageDTO);
 		return "bbs/list";
 	}
 	
@@ -73,24 +73,24 @@ public class BbsController {
 	}
 	// 게시글 수정 제출
 	@PostMapping("/edit")
-	public String edit(BbsPostVO postVO, RedirectAttributes attr) {
-		log.info("@@@ bbs/edit");
+	public String edit(BbsPostDTO postDTO, RedirectAttributes attr) {
+		log.info("@@@ bbs/edit submit");
 		
-		if (service.editPost(postVO)) {
+		if (service.editPost(postDTO)) {
 			attr.addFlashAttribute("result", "success");
 		} else {
 			attr.addFlashAttribute("result", "failure");
 		}
-		return "redirect:/bbs/read?num=" + postVO.getNum();
+		return "redirect:/bbs/read?num=" + postDTO.getNum();
 	}
 	
 	// 게시글 삭제
 	@DeleteMapping("/delete")
 	@ResponseBody
-	public ResponseEntity<String> delete(@RequestBody BbsPostVO postVO) {
+	public ResponseEntity<String> delete(@RequestBody BbsPostDTO postDTO) {
 		log.info("@@@ bbs/delete");
 		
-		return service.deletePost(postVO)
+		return service.deletePost(postDTO)
 				? new ResponseEntity<>(HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

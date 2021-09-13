@@ -6,7 +6,7 @@ import com.nhncorp.lucy.security.xss.LucyXssFilter;
 import com.nhncorp.lucy.security.xss.XssPreventer;
 import com.nhncorp.lucy.security.xss.XssSaxFilter;
 
-public class BbsPostVO {
+public class BbsPostDTO {
 	private int num;
 	private String title, content;
 	private String writer, password;
@@ -66,7 +66,7 @@ public class BbsPostVO {
 
 	@Override
 	public String toString() {
-		return "BbsPostVO [num=" + num + ", title=" + title + ", content=" + content + ", writer=" + writer
+		return "BbsPostDTO [num=" + num + ", title=" + title + ", content=" + content + ", writer=" + writer
 				+ ", password=" + password + ", writeDate=" + writeDate + ", updateDate=" + updateDate + "]";
 	}
 }

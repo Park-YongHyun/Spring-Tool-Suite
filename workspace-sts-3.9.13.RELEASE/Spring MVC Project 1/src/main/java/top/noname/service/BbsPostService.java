@@ -2,22 +2,22 @@ package top.noname.service;
 
 import java.util.List;
 
-import top.noname.domain.BbsPageVO;
-import top.noname.domain.BbsPostVO;
+import top.noname.domain.pageDTO;
+import top.noname.domain.BbsPostDTO;
 
 public interface BbsPostService {
 	// 게시글 작성
-	public boolean writePost(BbsPostVO postVO);
+	public boolean writePost(BbsPostDTO postDTO);
 	
 	// 게시글 읽기
-	public BbsPostVO readPost(int num);
+	public BbsPostDTO readPost(int num);
 	
 	// 게시글 목록 조회
-	public List<BbsPostVO> readPostList(BbsPageVO pageVO);
+	public List<BbsPostDTO> readPostList(pageDTO pageDTO);
 	
 	// 게시글 수정
-	public boolean editPost(BbsPostVO postVO);
+	public boolean editPost(BbsPostDTO postDTO);
 	
 	// 게시글 삭제
-	public boolean deletePost(BbsPostVO postVO);
+	public boolean deletePost(BbsPostDTO postDTO);
 }

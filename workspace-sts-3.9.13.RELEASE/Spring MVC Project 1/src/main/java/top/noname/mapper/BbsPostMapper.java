@@ -2,25 +2,25 @@ package top.noname.mapper;
 
 import java.util.List;
 
-import top.noname.domain.BbsPageVO;
-import top.noname.domain.BbsPostVO;
+import top.noname.domain.pageDTO;
+import top.noname.domain.BbsPostDTO;
 
 public interface BbsPostMapper {
 	// 게시글 작성
-	public int insert(BbsPostVO postVO);
+	public int insert(BbsPostDTO postDTO);
 
 	// 게시글 읽기
-	public BbsPostVO selectOne(int num);
+	public BbsPostDTO selectOne(int num);
 
 	// 게시글 목록 읽기
-	public List<BbsPostVO> selectList(BbsPageVO pageVO);
+	public List<BbsPostDTO> selectList(pageDTO pageDTO);
 
 	// 게시글 수정
-	public int update(BbsPostVO postVO);
+	public int update(BbsPostDTO postDTO);
 
 	// 게시글 삭제
-	public int delete(BbsPostVO postVO);
+	public int delete(BbsPostDTO postDTO);
 	
 	// 게시글 카운트
-	public int count();
+	public int count(pageDTO pageDTO);
 }

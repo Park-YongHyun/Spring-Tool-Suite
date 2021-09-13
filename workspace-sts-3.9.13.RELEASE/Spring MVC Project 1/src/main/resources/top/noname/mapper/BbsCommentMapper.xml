@@ -22,7 +22,7 @@
 	</insert>
 	
 	<!-- 댓글 읽기 -->
-	<select id="selectOne" resultType="top.noname.domain.BbsCommentVO">
+	<select id="selectOne" resultType="top.noname.domain.BbsCommentDTO">
 		select *
 		from bbs_comment
 		where num = #{num}
@@ -30,7 +30,7 @@
 	
 	<!-- 댓글 목록 읽기 -->
    	<!-- 계층형(트리) 댓글, 페이징: 최신순, 페이지내: 오래된순 -->
-	<select id="selectList" resultType="top.noname.domain.BbsCommentVO">
+	<select id="selectList" resultType="top.noname.domain.BbsCommentDTO">
 		<![CDATA[
 			select *
 			from (

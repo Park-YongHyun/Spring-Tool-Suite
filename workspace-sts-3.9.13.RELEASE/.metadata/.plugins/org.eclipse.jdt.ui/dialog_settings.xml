@@ -75,18 +75,19 @@
 		</section>
 	</section>
 	<section name="RefactoringWizard.preview">
-		<item key="width" value="600"/>
-		<item key="height" value="400"/>
+		<item key="width" value="1884"/>
+		<item key="height" value="880"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item key="updateSimilarElements" value="true"/>
 		<item key="updateSimilarElementsMatchStrategy" value="1"/>
 		<item key="updateTextualMatches" value="true"/>
-		<item key="updateQualifiedNames" value="false"/>
+		<item key="updateQualifiedNames" value="true"/>
 		<item key="patterns" value="*"/>
 		<item key="renameSubpackages" value="false"/>
 	</section>
 	<section name="RenameInformationPopup">
+		<item key="snap_position" value="2"/>
 	</section>
 	<section name="BuildPathsPropertyPage">
 		<item key="pageIndex" value="0"/>
@@ -100,9 +101,9 @@
 	</section>
 	<section name="ProblemSeveritiesConfigurationBlock">
 		<item key="expanded0" value="false"/>
-		<item key="expanded1" value="false"/>
+		<item key="expanded1" value="true"/>
 		<item key="expanded2" value="false"/>
-		<item key="expanded3" value="true"/>
+		<item key="expanded3" value="false"/>
 		<item key="expanded4" value="false"/>
 		<item key="expanded5" value="false"/>
 		<item key="expanded6" value="false"/>

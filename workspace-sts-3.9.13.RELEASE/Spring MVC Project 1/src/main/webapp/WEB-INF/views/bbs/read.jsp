@@ -4,6 +4,9 @@
 
 <%@ include file="../include/header.jsp"%>
 
+<c:set var="searchParams" value="${
+	page.searchKeyword != null ? String.format(\"&searchType=%s&searchKeyword=%s\", param.searchType, param.searchKeyword) : ''}"></c:set>
+
 <div class="d-flex align-items-center min-vh-100">
 	<!-- container -->
 	<div class="container-xxl col-lg-10 col-xl-8 col-xxl-6">
@@ -129,7 +132,7 @@
 				<li class="list-group-item">
 					<div class="row justify-content-end">
 						<div class="col-auto">
-							<a id="goto-list-button" class="btn btn-primary" role="button" href="/bbs?pageNum=${page.pageNum}&pageSize=${page.pageSize}">목록</a>
+							<a id="goto-list-button" class="btn btn-primary" role="button" href="/bbs?pageNum=${page.pageNum}&pageSize=${page.pageSize}${searchParams}">목록</a>
 						</div>
 					</div>
 				</li>

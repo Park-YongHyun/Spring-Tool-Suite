@@ -15,7 +15,7 @@
 	</insert>
 	
 	<!-- 게시글 읽기 -->
-	<select id="selectOne" resultType="top.noname.domain.BbsPostVO">
+	<select id="selectOne" resultType="top.noname.domain.BbsPostDTO">
 		select
 			num,
 			title, content,
@@ -25,20 +25,42 @@
 		where num = #{num}
 	</select>
 	
-	<!-- 게시글 목록 읽기 -->
-	<select id="selectList" resultType="top.noname.domain.BbsPostVO">
+	<!-- 게시글 목록 읽기 (+검색) -->
+	<select id="selectList" resultType="top.noname.domain.BbsPostDTO">
 		<![CDATA[
-			select *
-			from (
-				select /*+ index_desc(bbs_post bbs_post_pk) */
-					rownum rnum, num,
-					title, writer,
-					write_date
-				from bbs_post
-				where rownum <= #{endRow}
-			) where rnum >= #{startRow}
+		select *
+		from (
+			select /*+ index_desc(bbs_post bbs_post_pk) */
+				rownum rnum, num,
+				title, writer,
+				write_date
+			from bbs_post
+			where rownum <= #{endRow}
+		]]>
+			<trim prefix="and">
+				<include refid="search"></include>
+			</trim>
+		<![CDATA[
+		) where rnum >= #{startRow}
 		]]>
 	</select>
+	
+	<!-- 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<trim prefix="(" suffix=")" prefixOverrides="or">
+				<if test='searchType.contains("T")'>
+					title like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test='searchType.contains("C")'>
+					or content like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test='searchType.contains("W")'>
+					or writer like '%'||#{searchKeyword}||'%'
+				</if>
+			</trim>
+		</if>
+	</sql>
 	
 	<!-- 게시글 수정 -->
 	<update id="update">
@@ -61,7 +83,11 @@
 	
 	<!-- 게시글 카운트 -->
 	<select id="count" resultType="int">
-		select count(*) from bbs_post
+		select count(*)
+		from bbs_post
+		<trim prefix="where">
+			<include refid="search"></include>
+		</trim>
 	</select>
 </mapper>
 

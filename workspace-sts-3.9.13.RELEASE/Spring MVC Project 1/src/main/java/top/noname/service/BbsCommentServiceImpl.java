@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import top.noname.domain.BbsCommentVO;
-import top.noname.domain.BbsPageVO;
+import top.noname.domain.BbsCommentDTO;
+import top.noname.domain.pageDTO;
 import top.noname.mapper.BbsCommentMapper;
 
 @Service
@@ -16,26 +16,26 @@ public class BbsCommentServiceImpl implements BbsCommentService {
 	
 	// 댓글 작성
 	@Override
-	public boolean writeComment(BbsCommentVO commentVO) {
-		if (commentVO.getParent() != 0) { // 대댓글
-			BbsCommentVO parentCommentVO = mapper.selectOne(commentVO.getParent());
+	public boolean writeComment(BbsCommentDTO commentDTO) {
+		if (commentDTO.getParent() != 0) { // 대댓글
+			BbsCommentDTO parentCommentDTO = mapper.selectOne(commentDTO.getParent());
 			
-			if (parentCommentVO == null) {
+			if (parentCommentDTO == null) {
 				return false;
 			}
 			
-			commentVO.setPostNum(parentCommentVO.getPostNum());
-			commentVO.setDepth(parentCommentVO.getDepth() + 1);
+			commentDTO.setPostNum(parentCommentDTO.getPostNum());
+			commentDTO.setDepth(parentCommentDTO.getDepth() + 1);
 		}
 		
-		return mapper.insert(commentVO) == 1;
+		return mapper.insert(commentDTO) == 1;
 	}
 
 	// 댓글 목록 읽기
 	@Override
-	public List<BbsCommentVO> readCommentList(int postNum, BbsPageVO pageVO) {
-		pageVO.setPages(mapper.count(postNum));
-		List<BbsCommentVO> list = mapper.selectList(postNum, pageVO);
+	public List<BbsCommentDTO> readCommentList(int postNum, pageDTO pageDTO) {
+		pageDTO.setPages(mapper.count(postNum));
+		List<BbsCommentDTO> list = mapper.selectList(postNum, pageDTO);
 		list.forEach(comment -> {
 			if (comment.getWriteDate() == null) { // 임시 삭제된 댓글 처리
 				comment.setWriter(null);
@@ -48,8 +48,8 @@ public class BbsCommentServiceImpl implements BbsCommentService {
 
 	// 댓글 수정
 	@Override
-	public boolean editComment(BbsCommentVO commentVO) {
-		return mapper.update(commentVO) == 1;
+	public boolean editComment(BbsCommentDTO commentDTO) {
+		return mapper.update(commentDTO) == 1;
 	}
 
 	/* 댓글 삭제
@@ -60,24 +60,24 @@ public class BbsCommentServiceImpl implements BbsCommentService {
 			 * 타겟이 임시상태 and 자식이 없으면 삭제 후 재귀, 아니면 리턴
 	 */
 	@Override
-	public boolean deleteComment(BbsCommentVO commentVO) {
-		BbsCommentVO targetCommentVO = mapper.selectOne(commentVO.getNum()); // ! 입력 받은 데이터와 혼동 주의
+	public boolean deleteComment(BbsCommentDTO commentDTO) {
+		BbsCommentDTO targetCommentDTO = mapper.selectOne(commentDTO.getNum()); // ! 입력 받은 데이터와 혼동 주의
 		
-		if (mapper.hasChild(targetCommentVO)) {
-			return mapper.tempDelete(commentVO) == 1;
+		if (mapper.hasChild(targetCommentDTO)) {
+			return mapper.tempDelete(commentDTO) == 1;
 		} else {
-			if (mapper.delete(commentVO) == 1) {
-				deleteParentComment(targetCommentVO);
+			if (mapper.delete(commentDTO) == 1) {
+				deleteParentComment(targetCommentDTO);
 				return true;
 			}
 			return false;
 		}
 	}
-	private int deleteParentComment(BbsCommentVO commentVO) {
-		BbsCommentVO targetCommentVO = mapper.selectOne(commentVO.getParent());
+	private int deleteParentComment(BbsCommentDTO commentDTO) {
+		BbsCommentDTO targetCommentDTO = mapper.selectOne(commentDTO.getParent());
 		
-		if (targetCommentVO != null && targetCommentVO.getWriteDate() == null && !mapper.hasChild(targetCommentVO)) {
-			return mapper.delete(targetCommentVO) + deleteParentComment(targetCommentVO);
+		if (targetCommentDTO != null && targetCommentDTO.getWriteDate() == null && !mapper.hasChild(targetCommentDTO)) {
+			return mapper.delete(targetCommentDTO) + deleteParentComment(targetCommentDTO);
 		} else {
 			return 0;
 		}
