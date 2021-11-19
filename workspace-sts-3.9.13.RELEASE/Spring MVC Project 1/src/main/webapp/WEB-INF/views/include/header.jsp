@@ -11,3 +11,16 @@
 
 </head>
 <body>
+
+<style>
+@media (max-width: 576px) {
+	body {
+		font-size: 0.8rem
+	}
+}
+@media (min-width: 576px) and (max-width: 768px) {
+	body {
+		font-size: 0.9rem
+	}
+}
+</style>

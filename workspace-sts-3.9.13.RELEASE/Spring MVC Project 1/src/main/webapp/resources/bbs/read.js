@@ -171,7 +171,11 @@ function readCommentList (pageNum, pageSize) {
 			minutes: `${d.getMinutes()}`.padStart(2, '0'),
 			seconds: `${d.getSeconds()}`.padStart(2, '0')
 		}
-		return `${d.year}.${d.month}.${d.date} ${d.hours}:${d.minutes}:${d.seconds}`
+		if (date > Date.now() - 1000 * 3600 * 24 * 30) {
+			return `${d.year}.${d.month}.${d.date} ${d.hours}:${d.minutes}:${d.seconds}`
+		} else {
+			return `${d.hours}:${d.minutes}:${d.seconds}`
+		}
 	}
 }
 

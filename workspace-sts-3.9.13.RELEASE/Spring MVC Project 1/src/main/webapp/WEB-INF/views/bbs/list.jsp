@@ -1,3 +1,4 @@
+<%@page import="oracle.jdbc.proxy.annotation.Post"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -21,7 +22,7 @@ table#postList th, table#postList td {
 
 <div class="d-flex align-items-center min-vh-100">
 	<!-- container -->
-	<div class="container-xxl col-lg-10 col-xl-8 col-xxl-6">
+	<div class="container-fluid" style="max-width: 1000px">
 		<!-- card -->
 		<div class="card">
 			<!-- list-group -->
@@ -34,16 +35,23 @@ table#postList th, table#postList td {
 								<th class="col-1" scope="col">#</th>
 								<th class="col-6" scope="col">제목</th>
 								<th class="col-2" scope="col">작성자</th>
-								<th class="col-3" scope="col">작성일</th>
+								<th class="col-3" scope="col">작성</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${postList}" var="post">
 								<tr>
 									<th scope="row">${post.num}</th>
-									<td><a href="bbs/read?num=${post.num}&pageNum=${page.pageNum}&pageSize=${page.pageSize}${searchParams}">${post.title}</a></td>
+									<td><a href="/bbs/read?num=${post.num}&pageNum=${page.pageNum}&pageSize=${page.pageSize}${searchParams}">${post.title}</a></td>
 									<td>${post.writer}</td>
-									<td><fmt:formatDate value="${post.writeDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
+									<c:choose>
+										<c:when test="${post.writeDate.getTime() > System.currentTimeMillis() - (1000*3600*24*30)}">
+											<td><fmt:formatDate value="${post.writeDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
+										</c:when>
+										<c:otherwise>
+											<td><fmt:formatDate value="${post.writeDate}" pattern="HH:mm:ss" /></td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -61,12 +69,12 @@ table#postList th, table#postList td {
 
 				<!-- 페이지 버튼 -->
 				<li class="list-group-item">
-					<ul class="pagination justify-content-center">
+					<ul class="pagination flex-wrap justify-content-center">
 						<c:set var="pageSizeParam" value="&pageSize=${page.pageSize}"></c:set>
 
 						<c:if test="${page.prev}">
-							<li class="page-item"><a class="page-link" href="?pageNum=1&${pageSizeParam}${searchParams}"><c:out value="${'<<'}" /></a></li>
-							<li class="page-item"><a class="page-link" href="?pageNum=${page.startPage - 1}${pageSizeParam}${searchParams}"><c:out value="${'<'}" /></a></li>
+							<li class="page-item"><a class="page-link" href="/bbs?pageNum=1&${pageSizeParam}${searchParams}"><c:out value="${'<<'}" /></a></li>
+							<li class="page-item"><a class="page-link" href="/bbs?pageNum=${page.startPage - 1}${pageSizeParam}${searchParams}"><c:out value="${'<'}" /></a></li>
 						</c:if>
 
 						<c:forEach var="var" begin="${page.startPage}" end="${page.endPage}">
@@ -74,12 +82,12 @@ table#postList th, table#postList td {
 							<c:if test="${var == page.pageNum}">
 								<c:set var="active" value="active"></c:set>
 							</c:if>
-							<li class="page-item ${active}"><a class="page-link" href="?pageNum=${var}${pageSizeParam}${searchParams}">${var}</a></li>
+							<li class="page-item ${active}"><a class="page-link" href="/bbs?pageNum=${var}${pageSizeParam}${searchParams}">${var}</a></li>
 						</c:forEach>
 
 						<c:if test="${page.next}">
-							<li class="page-item"><a class="page-link" href="?pageNum=${page.endPage + 1}${pageSizeParam}${searchParams}"><c:out value="${'>'}" /></a></li>
-							<li class="page-item"><a class="page-link" href="?pageNum=${page.totalPage}${pageSizeParam}${searchParams}"><c:out value="${'>>'}" /></a></li>
+							<li class="page-item"><a class="page-link" href="/bbs?pageNum=${page.endPage + 1}${pageSizeParam}${searchParams}"><c:out value="${'>'}" /></a></li>
+							<li class="page-item"><a class="page-link" href="/bbs?pageNum=${page.totalPage}${pageSizeParam}${searchParams}"><c:out value="${'>>'}" /></a></li>
 						</c:if>
 					</ul>
 				</li>

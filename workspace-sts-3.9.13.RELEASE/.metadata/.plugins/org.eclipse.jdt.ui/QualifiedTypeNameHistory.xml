@@ -26,7 +26,6 @@
 <fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssPreventer"/>
 <fullyQualifiedTypeName name="top.noname.domain.BbsPostVO"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="top.noname.service.BbsPostService"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
 <fullyQualifiedTypeName name="top.noname.test.TestTemplate"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.javassist.compiler.ast.Keyword"/>
 <fullyQualifiedTypeName name="org.springframework.web.util.UriComponentsBuilder"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

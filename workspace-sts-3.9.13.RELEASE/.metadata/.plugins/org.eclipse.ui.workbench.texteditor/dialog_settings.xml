@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="List"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="list"/>
+			<item value="action"/>
+			<item value="?"/>
+			<item value="$"/>
+			<item value="&lt;fmt:formatDate value=&quot;${post.writeDate}&quot; pattern=&quot;"/>
+			<item value="&lt;fmt:formatDate value=&quot;${post.updateDate}&quot; pattern"/>
+			<item value="&lt;fmt:formatDate value=&quot;${post.writeDate}&quot; pattern=&quot;yyyy.MM.dd HH:mm:ss&quot; /"/>
 			<item value="href"/>
+			<item value="read"/>
+			<item value="read?"/>
+			<item value="list"/>
 			<item value="${pageSizeParam}"/>
 			<item value="${searchParams}"/>
 			<item value="pageSizeParam"/>
 			<item value="pageSize"/>
 			<item value="c:set"/>
-			<item value="url"/>
-			<item value="rul"/>
-			<item value="if"/>
-			<item value="WEB-INF/views/common/errorPage.jsp"/>
-			<item value="common"/>
-			<item value="&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;"/>
-			<item value="test"/>
-			<item value="page"/>
 		</list>
 		<list key="replacehistory">
 			<item value="when"/>

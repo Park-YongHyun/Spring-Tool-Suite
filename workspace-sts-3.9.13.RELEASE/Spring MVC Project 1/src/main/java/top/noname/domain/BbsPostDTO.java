@@ -8,6 +8,7 @@ import com.nhncorp.lucy.security.xss.XssSaxFilter;
 
 public class BbsPostDTO {
 	private int num;
+
 	private String title, content;
 	private String writer, password;
 	private Date writeDate, updateDate;
@@ -19,7 +20,7 @@ public class BbsPostDTO {
 		LucyXssFilter filter = XssSaxFilter.getInstance("lucy-xss-sax.xml");
 		content = filter.doFilter(content);
 	}
-	
+
 	public int getNum() {
 		return num;
 	}
@@ -35,7 +36,7 @@ public class BbsPostDTO {
 	public String getPassword() {
 		return password;
 	}
-	public Date getwriteDate() {
+	public Date getWriteDate() {
 		return writeDate;
 	}
 	public Date getUpdateDate() {
@@ -57,7 +58,7 @@ public class BbsPostDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setwriteDate(Date writeDate) {
+	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
 	public void setUpdateDate(Date updateDate) {

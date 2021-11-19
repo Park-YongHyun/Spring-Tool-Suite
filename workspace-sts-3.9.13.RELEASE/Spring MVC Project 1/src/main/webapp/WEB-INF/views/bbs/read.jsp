@@ -9,7 +9,7 @@
 
 <div class="d-flex align-items-center min-vh-100">
 	<!-- container -->
-	<div class="container-xxl col-lg-10 col-xl-8 col-xxl-6">
+	<div class="container-fluid" style="max-width: 1000px">
 		<!-- card -->
 		<div class="card">
 			<div class="card-header">
@@ -26,10 +26,24 @@
 				<div class="row justify-content-end">
 					<div class="col">${post.writer}</div>
 					<div class="col-auto">
-						<fmt:formatDate value="${post.updateDate}" pattern="'수정: 'yyyy.MM.dd HH:mm:ss" />
+						<c:choose>
+							<c:when test="${post.writeDate.getTime() > System.currentTimeMillis() - (1000*3600*24*30)}">
+								<fmt:formatDate value="${post.updateDate}" pattern="'수정: 'yyyy.MM.dd HH:mm:ss" />
+							</c:when>
+							<c:otherwise>
+								<fmt:formatDate value="${post.updateDate}" pattern="'수정: 'HH:mm:ss" />
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="col-auto">
-						<fmt:formatDate value="${post.writeDate}" pattern="'작성: 'yyyy.MM.dd HH:mm:ss" />
+						<c:choose>
+							<c:when test="${post.writeDate.getTime() > System.currentTimeMillis() - (1000*3600*24*30)}">
+								<fmt:formatDate value="${post.writeDate}" pattern="'작성: 'yyyy.MM.dd HH:mm:ss" />
+							</c:when>
+							<c:otherwise>
+								<fmt:formatDate value="${post.writeDate}" pattern="'작성: 'HH:mm:ss" />
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>

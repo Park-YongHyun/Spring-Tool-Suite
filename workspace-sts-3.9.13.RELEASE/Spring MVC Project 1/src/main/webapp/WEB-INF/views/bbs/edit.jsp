@@ -7,14 +7,14 @@
 
 <div class="d-flex align-items-center min-vh-100">
 	<!-- container -->
-	<div class="container-xxl col-lg-10 col-xl-8 col-xxl-6">
+	<div class="container-fluid" style="max-width: 1000px">
 		<!-- card -->
 		<div class="card">
 			<!-- list-group -->
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
 					<div>
-						<form:form commandName="postForm" action="?num=${post.num}">
+						<form:form commandName="postForm" action="/bbs/edit?num=${post.num}">
 							<div class="row mb-3">
 								<div class="col">
 									<input type="text" class="form-control" placeholder="제목" name="title" required="required" value="${post.title}">
@@ -32,7 +32,7 @@
 									<input type="text" class="form-control" placeholder="이름" name="writer" required="required" value="${post.writer}" readonly="">
 								</div>
 								<div class="col-2">
-									<input type="text" class="form-control" placeholder="암호" name="password" required="required">
+									<input type="password" class="form-control" placeholder="암호" name="password" required="required">
 								</div>
 							</div>
 							<div class="row justify-content-end">
