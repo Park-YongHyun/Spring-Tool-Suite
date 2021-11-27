@@ -38,12 +38,12 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="TextSearchPage">
-		<item key="CASE_SENSITIVE" value="true"/>
+		<item key="CASE_SENSITIVE" value="false"/>
 		<item key="REG_EX_SEARCH" value="false"/>
 		<item key="WHOLE_WORD" value="false"/>
 		<item key="SEARCH_DERIVED" value="false"/>
 		<item key="SEARCH_IN_BINARIES" value="false"/>
-		<item key="HISTORY_SIZE" value="11"/>
+		<item key="HISTORY_SIZE" value="12"/>
 		<section name="EXTENSIONS">
 			<item key="0" value="*"/>
 			<item key="1" value=""/>
@@ -52,6 +52,30 @@
 			<item key="4" value="log4j.dtd"/>
 		</section>
 		<section name="HISTORY0">
+			<item key="ignoreCase" value="true"/>
+			<item key="isRegExSearch" value="false"/>
+			<item key="isWholeWord" value="false"/>
+			<item key="textPattern" value="pageContext.request.contextPath"/>
+			<item key="scope" value="3"/>
+			<list key="fileNamePatterns">
+				<item value="*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item key="ignoreCase" value="true"/>
+			<item key="isRegExSearch" value="false"/>
+			<item key="isWholeWord" value="false"/>
+			<item key="textPattern" value="/resources/"/>
+			<item key="scope" value="3"/>
+			<list key="fileNamePatterns">
+				<item value="*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
 			<item key="ignoreCase" value="false"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -63,7 +87,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY3">
 			<item key="ignoreCase" value="false"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -75,7 +99,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY2">
+		<section name="HISTORY4">
 			<item key="ignoreCase" value="false"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -87,7 +111,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY3">
+		<section name="HISTORY5">
 			<item key="ignoreCase" value="false"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -99,7 +123,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY4">
+		<section name="HISTORY6">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -111,7 +135,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY5">
+		<section name="HISTORY7">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -123,7 +147,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY6">
+		<section name="HISTORY8">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -135,7 +159,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY7">
+		<section name="HISTORY9">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -147,7 +171,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY8">
+		<section name="HISTORY10">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
@@ -159,23 +183,11 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY9">
+		<section name="HISTORY11">
 			<item key="ignoreCase" value="true"/>
 			<item key="isRegExSearch" value="false"/>
 			<item key="isWholeWord" value="false"/>
 			<item key="textPattern" value="log4j.dtd"/>
-			<item key="scope" value="0"/>
-			<list key="fileNamePatterns">
-				<item value="*"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY10">
-			<item key="ignoreCase" value="true"/>
-			<item key="isRegExSearch" value="false"/>
-			<item key="isWholeWord" value="false"/>
-			<item key="textPattern" value="50001"/>
 			<item key="scope" value="0"/>
 			<list key="fileNamePatterns">
 				<item value="*"/>
@@ -198,5 +210,8 @@
 		<item key="DIALOG_WIDTH" value="486"/>
 		<item key="DIALOG_HEIGHT" value="405"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="">
+		<item key="org.eclipse.search.resultpage.limit" value="1000"/>
 	</section>
 </section>

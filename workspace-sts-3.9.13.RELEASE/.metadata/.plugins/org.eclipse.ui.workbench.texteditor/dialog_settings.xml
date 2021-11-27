@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="bbs"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="bbs"/>
+			<item value="basePath"/>
+			<item value="href"/>
+			<item value="pageContext.request.contextPath"/>
 			<item value="action"/>
 			<item value="?"/>
 			<item value="$"/>
 			<item value="&lt;fmt:formatDate value=&quot;${post.writeDate}&quot; pattern=&quot;"/>
 			<item value="&lt;fmt:formatDate value=&quot;${post.updateDate}&quot; pattern"/>
 			<item value="&lt;fmt:formatDate value=&quot;${post.writeDate}&quot; pattern=&quot;yyyy.MM.dd HH:mm:ss&quot; /"/>
-			<item value="href"/>
 			<item value="read"/>
 			<item value="read?"/>
 			<item value="list"/>
 			<item value="${pageSizeParam}"/>
 			<item value="${searchParams}"/>
-			<item value="pageSizeParam"/>
-			<item value="pageSize"/>
-			<item value="c:set"/>
 		</list>
 		<list key="replacehistory">
+			<item value="basePath"/>
 			<item value="when"/>
 			<item value="DTO"/>
 			<item value="reorder"/>

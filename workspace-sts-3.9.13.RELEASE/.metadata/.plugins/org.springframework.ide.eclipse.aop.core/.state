@@ -5,5 +5,5 @@
 <aop-project name="ex01"/>
 <aop-project name="ex02"/>
 <aop-project name="ex03"/>
-<aop-project name="Spring MVC Project 1"/>
+<aop-project name="spring mvc 1"/>
 </aop-reference-model>
